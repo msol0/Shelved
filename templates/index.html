@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shelved</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <style>
+
+        body {
+            background-image: url('{{ url_for('static', filename= 'pozadina.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Verdana', sans-serif;
+            display: flex;
+        }
+
+        .navbar {
+            background-color: transparent;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+
+        h1 {
+            color: #343a40;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+        <a class="navbar-brand" style="margin-left: 1rem;">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" width="auto" height="42">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('vrati_knjige')}}">Moje knjige <i
+                            class="bi bi-bookmark-heart" style="color:darkmagenta"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{url_for('dodaj_knjigu')}}">Dodaj Knjigu <i
+                            class="bi bi-bookmark-plus" style="color:darkmagenta"></i></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Moja statistika <i class="bi bi-bar-chart-line" style="color:darkmagenta"> </i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{url_for('knjige_po_zanrovima')}}">Po žanru</a>
+                    </div>
+                </li>
+
+            </ul>
+            {% if show_search %}
+            <form method="GET" action="/search" class="form-inline d-flex my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                       name="search_term">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
+            </form>
+            <form method="GET" action="/vrati/knjige" class="form-inline d-flex my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0 custom-button" type="submit"><i class="bi bi-x-lg custom-icon"></i></button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+</body>
+<style>
+    .dropdown-menu {
+        background-color: rgba(251, 205, 207, 0.74);
+    }
+    .custom-button {
+        background-color: transparent;
+        color: green;
+    }
+
+    .custom-button:hover {
+      background-color: red;
+    }
+
+    .custom-button:hover .custom-icon {
+      color: white;
+    }
+</style>

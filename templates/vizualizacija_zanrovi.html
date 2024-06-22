@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'index.html' %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js/dist/Chart.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #canvasContainer {
+            max-height: 400px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvasContainer">
+    <canvas id="mojGrafzanrovi" width="400" height="400"></canvas>
+</div>
+
+<script>
+    var zanrovi = eval("{{ zanrovi|safe }}[0]");
+
+    var data = {
+        labels: zanrovi.map(function (item) {
+            console.log(item);
+            return item.zanrovi;
+        }),
+        datasets: [{
+            data: zanrovi.map(function (item) {
+                return item.broj_knjiga;
+            }),
+            backgroundColor: ["#c59ade", "#8276e8", "#145ebb", "#a1ddff", "#c3ccff","#bbacf1", "#626bc0", "#10278e"],
+            borderColor: "#fff",
+            borderWidth: 2
+        }]
+    };
+
+    var ctx = document.getElementById("mojGrafzanrovi").getContext('2d');
+    var chart = new Chart(ctx, {
+        type: "pie",
+        data: data,
+        options: {
+            title: {
+                display: true,
+                text: 'Broj knjiga po zanrovima'
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+</body>

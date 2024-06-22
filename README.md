@@ -25,3 +25,7 @@ cd shelved
 docker build --tag shelved:3.1 .
 docker run -p 5000:5000 shelved:3.1
 ```
+### Kako lokalno pokrenuti aplikaciju?
+1. u preglednik upisati http://localhost:5000
+2. u terminalu otvoriti link koji se prikaže prilikom pokretanja
+3. u Docker Desktopu otvoriti link containera u kojem se aplikacija izvodi
